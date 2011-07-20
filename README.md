@@ -17,8 +17,10 @@ Dependencies
 ----
 
 pyreddit.core
+
 * mechanize
 
 pyreddit.crawlers
+
 * gevent
 * mechanize
