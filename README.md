@@ -1,6 +1,8 @@
 pyreddit
 --------
 
+PyReddit is a wrapper for Reddit.com's Json API
+
 This is a new repository so not much is setup yet. 
 ----
 
