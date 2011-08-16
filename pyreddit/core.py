@@ -43,6 +43,9 @@ class RedditT5(RedditThing):
         display_name = self.display_name
         return self._agent.get_subreddit(display_name)
 
+    def __unicode__(self):
+        return u"RedditT5<%s>" % (self.display_name)
+
 
 class RedditComment(RedditThing):
 
