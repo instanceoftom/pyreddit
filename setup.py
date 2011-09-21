@@ -4,8 +4,9 @@ from setuptools import setup
 
 setup(
     name='PyReddit',
+    author='Thomas Neyland',
     version='0.1.1dev',
-    packages=['pyreddit',],
+    packages=['pyreddit', ],
     license='Creative Commons Attribution-Noncommercial-Share Alike license',
     long_description=open('README.txt').read(),
     install_requires=['mechanize'],
