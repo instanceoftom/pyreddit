@@ -181,20 +181,22 @@ class RedditSubredditList(RedditListing):
 
 class RedditSubreddit(RedditListing):
 
-    _url = "http://www.reddit.com/r/%s/.json"
+    _url = "http://www.reddit.com/r/%s%s/.json"
     
-    def __init__(self, subreddit, json_data, reddit_agent=None):
+    def __init__(self, subreddit, json_data, reddit_agent=None, ordering=None):
 
         self.subreddit = subreddit
         self._kind = json_data.get("kind", "t2")
+        self._ordering = ordering
         super(RedditSubreddit, self).__init__(subreddit, json_data, reddit_agent)
 
     def get_next_page(self):
 
         last_post = self.get_last_post()
         last_post_name = last_post.name
+        ordering = self._ordering
 
-        return self._agent.get_subreddit(self.subreddit, after=last_post_name)
+        return self._agent.get_subreddit(self.subreddit, after=last_post_name, ordering=ordering)
 
     def __unicode__(self):
         return u"RedditSubreddit<%s>" % (self.subreddit.title())
@@ -460,9 +462,14 @@ class RedditAgent(object):
 
         return vote_response
 
-    def get_subreddit(self, subreddit, after=None):
+    def get_subreddit(self, subreddit, after=None, ordering=None):
 
-        url = RedditSubreddit._url % subreddit
+        if ordering:
+            order_tag = "/%s" % ordering
+        else:
+            order_tag = None
+
+        url = RedditSubreddit._url % (subreddit, order_tag or '')
 
         if after:
             url = "%s%s" % (url, self._after_pattern % (after,),)
@@ -470,7 +477,7 @@ class RedditAgent(object):
         data = self._session.make_request(url, reqtype="basic_info")
 
         if data:
-            return RedditSubreddit(subreddit, data, self)
+            return RedditSubreddit(subreddit, data, self, ordering=ordering)
 
     def get_subreddit_listing(self, after=None):
 
