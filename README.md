@@ -1,28 +1,12 @@
-pyreddit
+PyReddit
 --------
 
-PyReddit is a wrapper for Reddit.com's Json API
+PyReddit is a wrapper for Reddit.com's JSON API. It provides a thin structure around posts, comments and user API endpoints. It allows for easy access to the data from all three.
 
-This is a new repository so not much is setup yet. 
-----
-
-A Quick todo list:
-----
-
-* Create documentation
-* Use distutils to create an installer
-* Write examples
-* Write tests
-* Wrap the remaining parts of the reddit API
+--------
 
 Dependencies
 ----
 
-pyreddit.core
-
 * mechanize
-
-pyreddit.crawlers
-
 * gevent
-* mechanize
